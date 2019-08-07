@@ -1,6 +1,5 @@
 import express from 'express';
-import find from 'find';
-import path from 'path';
+import { contentService } from './content-service';
 
 const app = express()
 
@@ -9,10 +8,12 @@ const port = 3200
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/files', (req, res) => {
-  find.file(/\.md$/, path.join(__dirname, '../content'), function(files) {
-    console.log(files);
-    res.json(files.map(f => path.basename(f, '.md')));
-  })
+  const files = contentService.getFiles();
+  res.json(Object.keys(files).map(k => files[k].name));
+})
+
+app.get('/files/:name', (req, res) => {
+  contentService.getFile(req.params.name).then(file => res.json(file))
 })
 
 export default function start() {
