@@ -1,0 +1,18 @@
+{
+  "name": "kennis",
+  "version": "1.0.0",
+  "description": "A knowledge base",
+  "repository": "https://github.com/ThetaSinner/kennis.git",
+  "author": "ThetaSinner <greatdjonfire@hotmail.co.uk>",
+  "license": "GPL-3.0",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "express": "^4.17.1",
+    "find": "^0.3.0"
+  }
+}

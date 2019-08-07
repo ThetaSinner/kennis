@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# Babel
+server/lib
+
+# Test content
+server/content
