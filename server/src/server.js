@@ -9,7 +9,10 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/files', (req, res) => {
   const files = contentService.getFiles();
-  res.json(Object.keys(files).map(k => files[k].name));
+  res.json(Object.keys(files).map(k => ({
+    name: files[k].name,
+    group: files[k].group
+  })));
 })
 
 app.get('/files/:name', (req, res) => {

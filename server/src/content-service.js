@@ -3,8 +3,9 @@ import path from 'path';
 import { readFile } from 'fs';
 
 class ContentService {
-  constructor(watcher) {
+  constructor(watcher, baseDir) {
     this.files = {};
+    this.baseDir = baseDir;
 
     watcher
       .on('add', addPath => {
@@ -32,11 +33,14 @@ class ContentService {
   _structured(fromPath) {
     return {
       name: path.basename(fromPath, '.md'),
+      group: path.dirname(fromPath).replace(this.baseDir, '').replace(/\\/g, '/').replace(/^\//, ''),
       file: fromPath
     }
   }
 }
 
-const watcher = chokidar.watch(path.join(__dirname, '../content'));
+const baseDir = path.join(__dirname, '../content');
 
-export let contentService = new ContentService(watcher);
+const watcher = chokidar.watch(baseDir);
+
+export let contentService = new ContentService(watcher, baseDir);
