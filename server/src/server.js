@@ -1,7 +1,9 @@
 import express from 'express';
+import cors from 'cors';
 import { contentService } from './content-service';
 
 const app = express()
+app.use(cors())
 
 const port = 3200
 
@@ -10,13 +12,14 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/files', (req, res) => {
   const files = contentService.getFiles();
   res.json(Object.keys(files).map(k => ({
+    id: files[k].id,
     name: files[k].name,
     group: files[k].group
   })));
 })
 
-app.get('/files/:name', (req, res) => {
-  contentService.getFile(req.params.name).then(file => res.json(file))
+app.get('/files/:id', (req, res) => {
+  contentService.getFile(req.params.id).then(file => res.json(file))
 })
 
 export default function start() {

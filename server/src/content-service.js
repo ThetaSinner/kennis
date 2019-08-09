@@ -1,6 +1,7 @@
 import chokidar from 'chokidar';
 import path from 'path';
 import { readFile } from 'fs';
+import uuid from 'uuid/v4';
 
 class ContentService {
   constructor(watcher, baseDir) {
@@ -10,11 +11,11 @@ class ContentService {
     watcher
       .on('add', addPath => {
         const addStructured = this._structured(addPath);
-        this.files[addStructured.name] = addStructured;
+        this.files[addStructured.id] = addStructured;
       })
       .on('unlink', removePath => {
         const removeStructured = this._structured(removePath);
-        delete this.files[removeStructured.name];
+        delete this.files[removeStructured.id];
       });
   }
 
@@ -22,18 +23,21 @@ class ContentService {
     return this.files;
   }
 
-  getFile(name) {
+  getFile(id) {
     return new Promise((resolve, reject) => {
-      readFile(this.files[name].file, "utf8", (err, data) => {
+      readFile(this.files[id].file, "utf8", (err, data) => {
         err ? reject(err) : resolve(data);
       })
     })
   }
 
   _structured(fromPath) {
+    const group = path.dirname(fromPath).replace(this.baseDir, '').replace(/\\/g, '/').replace(/^\//, '');
+
     return {
+      id: uuid(),
       name: path.basename(fromPath, '.md'),
-      group: path.dirname(fromPath).replace(this.baseDir, '').replace(/\\/g, '/').replace(/^\//, ''),
+      group: group ? group : 'root',
       file: fromPath
     }
   }
