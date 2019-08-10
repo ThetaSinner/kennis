@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { contentService } from './content-service';
+import { searchService } from './search-service';
 
 const app = express()
 app.use(cors())
@@ -20,6 +21,12 @@ app.get('/files', (req, res) => {
 
 app.get('/files/:id', (req, res) => {
   contentService.getFile(req.params.id).then(file => res.json(file))
+})
+
+app.get('/search', (req, res) => {
+  const text = req.query.text;
+
+  res.json(searchService.search(text))
 })
 
 export default function start() {

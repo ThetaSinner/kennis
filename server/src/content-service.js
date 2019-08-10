@@ -2,21 +2,42 @@ import chokidar from 'chokidar';
 import path from 'path';
 import { readFile } from 'fs';
 import uuid from 'uuid/v4';
+import { EventEmitter } from 'events';
 
 class ContentService {
   constructor(watcher, baseDir) {
     this.files = {};
     this.baseDir = baseDir;
 
+    this.changedEmitter = new EventEmitter();
+
+    this.isReady = false;
+
     watcher
+      .on('ready', () => {
+        this.isReady = true;
+        this._emitChange();
+      })
       .on('add', addPath => {
         const addStructured = this._structured(addPath);
         this.files[addStructured.id] = addStructured;
+        this._emitChange();
+      })
+      .on('change', changePath => {
+        const changeStructured = this._structured(changePath);
+        this._emitChange();
       })
       .on('unlink', removePath => {
         const removeStructured = this._structured(removePath);
         delete this.files[removeStructured.id];
+        this._emitChange();
       });
+  }
+
+  _emitChange() {
+    if (this.isReady) {
+      this.changedEmitter.emit('change', this.files);
+    }
   }
 
   getFiles() {
@@ -29,6 +50,10 @@ class ContentService {
         err ? reject(err) : resolve(data);
       })
     })
+  }
+
+  addChangeListener(listener) {
+    this.changedEmitter.on('change', listener);
   }
 
   _structured(fromPath) {
