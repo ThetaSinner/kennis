@@ -1,6 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
+      <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+        <div class="form-group">
+          <label for="searchInput">Search</label>
+          <input type="text" class="form-control" id="searchInput" aria-describedby="searchHelp"
+            placeholder="Enter search query" name="searchText" [(ngModel)]="searchText">
+          <small id="searchHelp" class="form-text text-muted">Search for pages.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      <div *ngFor="let res of searchResults$ | async">
+          <em>{{ res.group }}</em>
+          <p><a [routerLink]="['/pages', res.id]">{{ res.name }}</a></p>
+      </div>
       <div *ngFor="let group of articlesGroups$ | async">
         <em>{{ group.group }}</em>
         <p *ngFor="let article of group.values"><a [routerLink]="['/pages', article.id]">{{ article.name }}</a></p>
