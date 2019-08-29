@@ -6,7 +6,8 @@
   "author": "ThetaSinner <greatdjonfire@hotmail.co.uk>",
   "license": "GPL-3.0",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "serve": "yarn run build && node lib/index.js"
   },
   "dependencies": {
     "@babel/cli": "^7.5.5",

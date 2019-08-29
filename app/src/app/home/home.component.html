@@ -14,10 +14,11 @@
           <em>{{ res.group }}</em>
           <p><a [routerLink]="['/pages', res.id]">{{ res.name }}</a></p>
       </div>
-      <div *ngFor="let group of articlesGroups$ | async">
+      <!-- <div *ngFor="let group of articlesGroups$ | async">
         <em>{{ group.group }}</em>
         <p *ngFor="let article of group.values"><a [routerLink]="['/pages', article.id]">{{ article.name }}</a></p>
-      </div>
+      </div> -->
+      <app-tree-view [data$]="articlesGroups$"></app-tree-view>
     </div>
   </div>
 </div>
