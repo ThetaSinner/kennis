@@ -1,0 +1,13 @@
+.panels {
+  .shaded {
+    background-image: linear-gradient(to right, gray, lightgray, lightgray);
+  }
+
+  .shaded-panel {
+    height: 100%;
+  }
+
+  .panel-container {
+    background: lightgray;
+  }
+}

@@ -110,7 +110,6 @@ export class HomeComponent implements OnInit {
     }
 
     let index = 0;
-    console.log(search);
     while (search.length && search[index].key) {
       index++;
     }

@@ -1,12 +1,14 @@
-.nav-folder {
-  cursor: pointer;
-}
+.panel {
+  .nav-folder {
+    cursor: pointer;
+  }
 
-.icon {
-  color: black;
-  display: inline;
+  .icon {
+    color: black;
+    display: inline;
 
-  position: relative;
-  /* Adjust these values accordingly */
-  top: 5px;
+    position: relative;
+    /* Adjust these values accordingly */
+    top: 5px;
+  }
 }

@@ -1,5 +1,5 @@
-<div class="col-sm-4" *ngIf="data !== null">
-  <div *ngFor="let item of data; let i = index" class="col-sm-4" (click)='selectItem(i)'>
+<div *ngIf="data !== null" class="panel">
+  <div *ngFor="let item of data; let i = index" (click)='selectItem(i)'>
     <div *ngIf="item.key" class="nav-folder">
       <i class="material-icons icon">folder</i>
       <span>{{ item.key }}</span>

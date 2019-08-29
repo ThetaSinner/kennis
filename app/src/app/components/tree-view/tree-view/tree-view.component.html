@@ -1,5 +1,25 @@
-<div class="row">
-  <app-tree-view-panel [data]="stageOneData" (onSelect)="panelOneSelect($event)"></app-tree-view-panel>
-  <app-tree-view-panel [data]="stageTwoData" (onSelect)="panelTwoSelect($event)"></app-tree-view-panel>
-  <app-tree-view-panel [data]="stageThreeData" (onSelect)="panelThreeSelect($event)"></app-tree-view-panel>
+<div class="row no-gutters align-items-stretch panels">
+  <div class="col-sm-4 panel-container">
+    <app-tree-view-panel [data]="stageOneData" (onSelect)="panelOneSelect($event)"></app-tree-view-panel>
+  </div>
+  <div class="col-sm-4">
+    <div class="row no-gutters align-items-stretch shaded-panel">
+      <div class="col-sm-1 shaded">
+        <!-- For shading effect -->
+      </div>
+      <div class="col-sm-11 panel-container">
+        <app-tree-view-panel [data]="stageTwoData" (onSelect)="panelTwoSelect($event)"></app-tree-view-panel>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="row no-gutters align-items-stretch shaded-panel">
+      <div class="col-sm-1 shaded">
+        <!-- For shading effect -->
+      </div>
+      <div class="col-sm-11 panel-container">
+        <app-tree-view-panel [data]="stageThreeData" (onSelect)="panelThreeSelect($event)"></app-tree-view-panel>
+      </div>
+    </div>
+  </div>
 </div>

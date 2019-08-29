@@ -14,11 +14,9 @@
           <em>{{ res.group }}</em>
           <p><a [routerLink]="['/pages', res.id]">{{ res.name }}</a></p>
       </div>
-      <!-- <div *ngFor="let group of articlesGroups$ | async">
-        <em>{{ group.group }}</em>
-        <p *ngFor="let article of group.values"><a [routerLink]="['/pages', article.id]">{{ article.name }}</a></p>
-      </div> -->
-      <app-tree-view [data$]="articlesGroups$"></app-tree-view>
+      <div class="mt-2">
+        <app-tree-view [data$]="articlesGroups$"></app-tree-view>
+      </div>
     </div>
   </div>
 </div>
