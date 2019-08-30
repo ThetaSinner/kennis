@@ -65,6 +65,7 @@ server/lib
 
 # WebPack
 server/dist
+app/dist
 
 # Test content
 server/content
