@@ -5,18 +5,24 @@
   "repository": "https://github.com/ThetaSinner/kennis.git",
   "author": "ThetaSinner <greatdjonfire@hotmail.co.uk>",
   "license": "GPL-3.0",
+  "private": true,
   "scripts": {
     "build": "babel src -d lib",
-    "serve": "yarn run build && node lib/index.js"
+    "serve": "yarn run build && node lib/index.js",
+    "build:prod": "yarn webpack",
+    "assemble": "docker build -t kennis-server ."
   },
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
     "chokidar": "^3.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "lunr": "^2.3.6",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   }
 }

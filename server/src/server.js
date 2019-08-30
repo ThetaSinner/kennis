@@ -8,7 +8,7 @@ app.use(cors())
 
 const port = 3200
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Ok'))
 
 app.get('/files', (req, res) => {
   const files = contentService.getFiles();
@@ -30,5 +30,5 @@ app.get('/search', (req, res) => {
 })
 
 export default function start() {
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+  app.listen(port, () => console.log(`Kennis server listening on port ${port}!`))
 }

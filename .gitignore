@@ -63,5 +63,8 @@ typings/
 # Babel
 server/lib
 
+# WebPack
+server/dist
+
 # Test content
 server/content
