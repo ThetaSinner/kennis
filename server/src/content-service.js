@@ -68,7 +68,7 @@ class ContentService {
   }
 }
 
-const baseDir = path.join(__dirname, '../content');
+const baseDir = process.env.CONTENT_DIR || path.join(__dirname, '../content');
 
 const watcher = chokidar.watch(baseDir);
 
