@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  kennis-app:
+    build: ./app
+    ports:
+    - "4200:80"
+  kennis-server:
+    build: ./server
+    volumes:
+    - "./content:/opt/content"
+    ports:
+    - "3200:3200"
