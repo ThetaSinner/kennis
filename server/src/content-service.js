@@ -3,6 +3,7 @@ import path from 'path';
 import { readFile } from 'fs';
 import uuid from 'uuid/v4';
 import { EventEmitter } from 'events';
+import { settings } from './settings';
 
 class ContentService {
   constructor(watcher, baseDir) {
@@ -63,13 +64,12 @@ class ContentService {
       id: uuid(),
       name: path.basename(fromPath, '.md'),
       group: group ? group : 'root',
-      file: fromPath
+      file: fromPath,
+      ext: path.extname(fromPath)
     }
   }
 }
 
-const baseDir = process.env.CONTENT_DIR || path.join(__dirname, '../content');
+const watcher = chokidar.watch(settings.baseDir);
 
-const watcher = chokidar.watch(baseDir);
-
-export let contentService = new ContentService(watcher, baseDir);
+export let contentService = new ContentService(watcher, settings.baseDir);
