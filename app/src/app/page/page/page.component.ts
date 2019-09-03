@@ -20,7 +20,7 @@ export class PageComponent implements OnInit {
   ngOnInit() {
     this.article$ = this.route.params.pipe(
       concatMap(p => this.filesService.getArticle(p.id)),
-      map(p => marked(p))
+      map(p => marked(p.content))
     )
   }
 

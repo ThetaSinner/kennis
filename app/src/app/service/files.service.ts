@@ -3,9 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
-interface ArticleModel {
+export interface ArticleModel {
   name: String;
   group: String;
+}
+
+export interface Article {
+  content: string;
 }
 
 @Injectable({
@@ -19,7 +23,7 @@ export class FilesService {
     return <Observable<Array<ArticleModel>>> this.http.get(`${environment.serverUrl}/files`);
   }
 
-  getArticle(id: String): Observable<any> {
-    return <Observable<Array<ArticleModel>>> this.http.get(`${environment.serverUrl}/files/${id}`);
+  getArticle(id: String): Observable<Article> {
+    return <Observable<Article>> this.http.get(`${environment.serverUrl}/files/${id}`);
   }
 }

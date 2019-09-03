@@ -4,6 +4,7 @@ import path from 'path';
 import { contentService } from './content-service';
 import { searchService } from './search-service';
 import { settings } from './settings';
+import Mustache from 'mustache';
 
 const app = express()
 app.use(cors())
@@ -34,7 +35,11 @@ app.get('/files', (req, res) => {
 })
 
 app.get('/files/:id', (req, res) => {
-  contentService.getFile(req.params.id).then(file => res.json(file))
+  contentService.getFile(req.params.id).then(file => {
+    const rendered = Mustache.render(file, settings.templateValues);
+    res.type('text/markdown')
+    res.send({content: rendered})
+  })
 })
 
 app.get('/search', (req, res) => {
