@@ -24,6 +24,7 @@
     "mustache": "^3.0.3",
     "uuid": "^3.3.2",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.7",
+    "winston": "^3.2.1"
   }
 }

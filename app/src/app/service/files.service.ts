@@ -23,7 +23,11 @@ export class FilesService {
     return <Observable<Array<ArticleModel>>> this.http.get(`${environment.serverUrl}/files`);
   }
 
-  getArticle(id: String): Observable<Article> {
-    return <Observable<Article>> this.http.get(`${environment.serverUrl}/files/${id}`);
+  getArticle(query: string): Observable<Article> {
+    return <Observable<Article>> this.http.get(`${environment.serverUrl}/files/${query}`);
+  }
+
+  getPage(uri: string): Observable<Article> {
+    return <Observable<Article>> this.http.get(`${environment.serverUrl}/pages/${uri}`);
   }
 }

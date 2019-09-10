@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FilesService } from 'src/app/service/files.service';
 import { concatMap, map } from 'rxjs/operators';
 import marked from 'marked';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-page',
@@ -18,10 +19,20 @@ export class PageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.article$ = this.route.params.pipe(
-      concatMap(p => this.filesService.getArticle(p.id)),
+    const query = this.route.snapshot.url.map(obj => obj.path).join('/');
+
+    this.article$ = of(query).pipe(
+      concatMap(q => {
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+        if (uuidRegex.test(q)) {
+          return this.filesService.getArticle(q)
+        }
+        else {
+          return this.filesService.getPage(q)
+        }
+      }),
       map(p => marked(p.content))
     )
   }
-
 }

@@ -12,8 +12,11 @@ const routes: Routes = [{
   path: 'home',
   component: HomeComponent
 }, {
-  path: 'pages/:id',
-  component: PageComponent
+  path: 'pages',
+  children: [{
+    path: '**',
+    component: PageComponent
+  }]
 }];
 
 @NgModule({
