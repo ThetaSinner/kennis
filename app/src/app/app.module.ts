@@ -10,6 +10,7 @@ import { PageComponent } from './page/page/page.component';
 import { FormsModule } from '@angular/forms';
 import { TreeViewComponent } from './components/tree-view/tree-view/tree-view.component';
 import { TreeViewPanelComponent } from './components/tree-view/tree-view-panel/tree-view-panel.component';
+import { RouteTransformDirective } from './directive/route-transform.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TreeViewPanelComponent } from './components/tree-view/tree-view-panel/t
     HomeComponent,
     PageComponent,
     TreeViewComponent,
-    TreeViewPanelComponent
+    TreeViewPanelComponent,
+    RouteTransformDirective
   ],
   imports: [
     BrowserModule,

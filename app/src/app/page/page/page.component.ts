@@ -4,6 +4,8 @@ import { FilesService } from 'src/app/service/files.service';
 import { concatMap, map } from 'rxjs/operators';
 import marked from 'marked';
 import { of } from 'rxjs';
+import DOMPurify from 'dompurify';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page',
@@ -15,7 +17,8 @@ export class PageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private filesService: FilesService
+    private filesService: FilesService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit() {
