@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class RouteTransformDirective {
 
   constructor(private router: Router) {
+    // Required to make the same component re-init for a different route.
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
@@ -14,18 +15,12 @@ export class RouteTransformDirective {
 
   @HostListener('click', ['$event'])
   public onClick(event) {
-    console.log(event.target.tagName);
     if (event.target.tagName === 'A') {
-      event.preventDefault();
       const href = event.target.getAttribute('href');
-      // const parts = href.split('/').filter(a => a);
-      // if (href.indexOf('/') === 0) {
-      //   parts[0] = '/' + parts[0];
-      // }
-      // console.log(parts);
-      // this.router.navigate(parts);
-      console.log(href);
-      this.router.navigateByUrl(href);
+      if (!/^https?:\/\//.test(href)) {
+        event.preventDefault();
+        this.router.navigateByUrl(href);
+      }
     }
   }
 }

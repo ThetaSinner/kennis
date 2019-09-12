@@ -17,8 +17,7 @@ export class PageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private filesService: FilesService,
-    private sanitizer: DomSanitizer
+    private filesService: FilesService
   ) { }
 
   ngOnInit() {
