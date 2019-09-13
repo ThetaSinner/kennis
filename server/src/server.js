@@ -50,7 +50,9 @@ app.get('/files/:id', (req, res) => {
 app.get('/search', (req, res) => {
   const text = req.query.text;
 
-  res.json(searchService.search(text))
+  serverLogger.debug('Searching by text [%s]', text);
+
+  res.json(searchService.search(text));
 })
 
 app.get('/pages/*', (req, res) => {

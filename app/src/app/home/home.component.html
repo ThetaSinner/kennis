@@ -1,18 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-        <div class="form-group">
-          <label for="searchInput">Search</label>
-          <input type="text" class="form-control" id="searchInput" aria-describedby="searchHelp"
-            placeholder="Enter search query" name="searchText" [(ngModel)]="searchText">
-          <small id="searchHelp" class="form-text text-muted">Search for pages.</small>
+      <form (ngSubmit)="onSubmit()" #heroForm="ngForm" class="mt-2 mb-1">
+        <div class="input-group">
+          <input type="text" class="form-control shadow-none" id="searchInput" aria-describedby="searchHelp"
+            placeholder="Enter search query" name="searchText" [(ngModel)]="searchText" autocomplete="off">
+          <div class="input-group-append">
+              <button type="submit" class="btn btn-outline-secondary">Search</button>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
       </form>
-      <div *ngFor="let res of searchResults$ | async">
+      <div id="searchResults" *ngIf="searchResults$">
+        <i id="clearSearchResult" class="material-icons icon float-right" (click)="clearSearchResult()">clear</i>
+
+        <div *ngFor="let res of searchResults$ | async">
           <em>{{ res.group }}</em>
           <p><a [routerLink]="['/pages', res.id]">{{ res.name }}</a></p>
+        </div>
+        <p>Number of search results: {{ numberOfResults }}</p>
       </div>
       <div class="mt-2">
         <app-tree-view [data$]="articlesGroups$"></app-tree-view>

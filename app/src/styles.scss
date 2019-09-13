@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+$body-bg: rgba(0, 0, 0, 0.8);
+$body-color: rgb(155, 155, 155);
+
+$input-bg: rgba(0, 0, 0, 0.4);
+$input-color: $body-color;
+
+$input-border-color: rgba(2, 1, 1, 0.4);
+
+$input-focus-border-color: lighten($input-border-color, 25%);
+
+$theme-colors: (
+  "primary": #68cf93,
+  "secondary": #3d7e58,
+  "danger": #ff4136
+);
+
+// @import '../node_modules/bootstrap/scss/variables';
+@import '../node_modules/bootstrap/scss/bootstrap';

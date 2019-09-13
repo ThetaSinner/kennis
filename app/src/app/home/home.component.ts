@@ -21,12 +21,13 @@ export class HomeComponent implements OnInit {
   // Search.
   searchText: string;
   searchResults$: Observable<Object>;
+  numberOfResults: number;
   articles: any;
 
   constructor(private filesService: FilesService, private searchService: SearchService) {
     this.transformArticleGroups = this.transformArticleGroups.bind(this);
 
-    this.articlesGroups$ = filesService.articles.pipe(
+    this.articlesGroups$ = this.filesService.articles.pipe(
       concatMap(articles => {
         this.articles = articles;
         return of(...articles).pipe(
@@ -45,7 +46,10 @@ export class HomeComponent implements OnInit {
 
   onSubmit() {
     this.searchResults$ = this.searchService.search(this.searchText).pipe(
-      map((p: Array<any>) => p.map(i => this.articles.find(a => a.id === i.ref)))
+      map((p: Array<any>) => {
+        this.numberOfResults = p.length;
+        return p.map(i => this.articles.find(a => a.id === i.ref))
+      })
     );
   }
 
@@ -125,5 +129,10 @@ export class HomeComponent implements OnInit {
     }
 
     item['children'] = article.values.map(val => ({link: val}));
+  }
+
+  clearSearchResult() {
+    this.searchResults$ = null;
+    this.numberOfResults = 0;
   }
 }
