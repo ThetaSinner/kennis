@@ -132,6 +132,7 @@ export class HomeComponent implements OnInit {
   }
 
   clearSearchResult() {
+    this.searchText = '';
     this.searchResults$ = null;
     this.numberOfResults = 0;
   }

@@ -1,6 +1,10 @@
+$panel-colour: rgb(87, 87, 87);
+
 .panels {
+  min-height: 40rem;
+
   .shaded {
-    background-image: linear-gradient(to right, gray, lightgray, lightgray);
+    background-image: linear-gradient(to right, gray, $panel-colour, $panel-colour);
   }
 
   .shaded-panel {
@@ -8,6 +12,6 @@
   }
 
   .panel-container {
-    background: lightgray;
+    background: $panel-colour;
   }
 }
