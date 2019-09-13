@@ -4,7 +4,7 @@
       <i class="material-icons icon">folder</i>
       <span>{{ item.key }}</span>
     </div>
-    <div *ngIf="!item.key">
+    <div *ngIf="!item.key" class="nav-page-link">
       <a [routerLink]="['/pages', item.link.id]">{{ item.link && item.link.name }}</a>
     </div>
   </div>
