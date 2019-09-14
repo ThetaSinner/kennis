@@ -1,0 +1,1 @@
+magick convert -background none icon.svg -define icon:auto-resize ../src/favicon.ico

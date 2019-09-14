@@ -15,7 +15,7 @@ yarn install
 yarn run build:prod
 yarn run assemble
 
-docker tag kennis-server thetasinner/kennis-app:1.0
-docker tag kennis-server thetasinner/kennis-app:latest
+docker tag kennis-app thetasinner/kennis-app:1.0
+docker tag kennis-app thetasinner/kennis-app:latest
 
 popd
