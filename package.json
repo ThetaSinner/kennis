@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@ephyra/ckeditor5-build-markdown": "^1.0.0"
+  }
+}

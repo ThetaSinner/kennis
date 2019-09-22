@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { TreeViewComponent } from './components/tree-view/tree-view/tree-view.component';
 import { TreeViewPanelComponent } from './components/tree-view/tree-view-panel/tree-view-panel.component';
 import { RouteTransformDirective } from './directive/route-transform.directive';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { RouteTransformDirective } from './directive/route-transform.directive';
     PageComponent,
     TreeViewComponent,
     TreeViewPanelComponent,
-    RouteTransformDirective
+    RouteTransformDirective,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { RouteTransformDirective } from './directive/route-transform.directive';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    NgbAlertModule
+    NgbAlertModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
