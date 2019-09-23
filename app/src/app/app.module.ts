@@ -13,6 +13,7 @@ import { TreeViewPanelComponent } from './components/tree-view/tree-view-panel/t
 import { RouteTransformDirective } from './directive/route-transform.directive';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditorComponent } from './editor/editor.component';
+import { EditorHostComponent } from './editor-host/editor-host.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditorComponent } from './editor/editor.component';
     TreeViewComponent,
     TreeViewPanelComponent,
     RouteTransformDirective,
-    EditorComponent
+    EditorComponent,
+    EditorHostComponent
   ],
   imports: [
     BrowserModule,

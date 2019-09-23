@@ -1,0 +1,8 @@
+<a routerLink="/home" id="backLink"><i class="material-icons icon">arrow_back</i></a>
+<div class="container editor-container">
+  <div class="row">
+    <div class="col-sm">
+      <app-editor [source$]="source$" (onSave)="handleSave($event)"></app-editor>
+    </div>
+  </div>
+</div>
