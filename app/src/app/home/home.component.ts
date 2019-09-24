@@ -23,6 +23,10 @@ export class HomeComponent implements OnInit {
   searchResults$: Observable<Object>;
   numberOfResults: number;
   articles: any;
+  group: any;
+
+  // Add
+  addFileInput: string;
 
   constructor(private filesService: FilesService, private searchService: SearchService) {
     this.transformArticleGroups = this.transformArticleGroups.bind(this);
@@ -65,24 +69,28 @@ export class HomeComponent implements OnInit {
       const path = article.group.split('/');
       if (path.length == 1) {
         const item = {
-          key: path[0]
+          key: path[0],
+          group: article.group
         };
         result.unshift(item);
 
         item['children'] = article.values.map(val => ({link: val}));
       }
       else {
-        this.doInsert(result, path, article);
+        this.doInsert(result, path, article.group, article);
       }
     }
 
     return result
   }
 
-  private doInsert(result: any[], path: string[], article: ArticleGroup) {
+  private doInsert(result: any[], path: string[], group: string, article: ArticleGroup) {
     let search = result;
+    console.log('path', path);
     const lastp = path.pop();
+    const subgroup = [];
     for (const p of path) {
+      subgroup.push(p)
       let foundSearch = false;
       for (const s of search) {
         if (s.key === p) {
@@ -100,6 +108,7 @@ export class HomeComponent implements OnInit {
 
         const item = {
           key: p,
+          group: subgroup.join('/'),
           children: []
         };
         if (search) {
@@ -118,8 +127,10 @@ export class HomeComponent implements OnInit {
       index++;
     }
 
+    subgroup.push(lastp);
     const item = {
-      key: lastp
+      key: lastp,
+      group: subgroup.join('/')
     };
     if (search) {
       search.splice(index, 0, item);
@@ -135,5 +146,13 @@ export class HomeComponent implements OnInit {
     this.searchText = '';
     this.searchResults$ = null;
     this.numberOfResults = 0;
+  }
+
+  activeGroupChange(group) {
+    this.group = group;
+  }
+
+  addFile() {
+    console.log('Add file', this.addFileInput, 'to group', this.group);
   }
 }
