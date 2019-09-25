@@ -9,6 +9,7 @@ export interface ArticleModel {
 }
 
 export interface Article {
+  id: string;
   content: string;
 }
 

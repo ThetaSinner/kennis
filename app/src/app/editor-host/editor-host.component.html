@@ -2,7 +2,7 @@
 <div class="container editor-container">
   <div class="row">
     <div class="col-sm">
-      <app-editor [source$]="source$" (onSave)="handleSave($event)"></app-editor>
+      <app-editor [source$]="source$" (onSave)="handleSave($event)" (onSaveAndExit)="handleSaveAndExit($event)"></app-editor>
     </div>
   </div>
 </div>

@@ -1,7 +1,11 @@
-#backLink {
+.controls-container {
   position: absolute;
   top: 1rem;
   left: 0.5rem;
+
+  a {
+    float: left;
+  }
 }
 
 .markdown-container {

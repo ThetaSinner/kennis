@@ -1,2 +1,7 @@
 <ckeditor [editor]="Editor" data="" [(ngModel)]="content"></ckeditor>
-<button (click)="save()" class="btn btn-primary">Save</button>
+<div class="row">
+  <div class="col-sm">
+    <button (click)="save()" class="btn btn-primary mt-2 mr-2">Save</button>
+    <button (click)="saveAndClose()" class="btn btn-primary mt-2">Save and Close</button>
+  </div>
+</div>

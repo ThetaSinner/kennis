@@ -52,8 +52,8 @@ app.get('/files/:id', (req, res) => {
   const id = req.params.id;
   serverLogger.debug('Getting file by id %s', id);
 
-  contentService.getFile(id).then(file => {
-    sendFile(res, file);
+  contentService.getFileContentInfo(id).then(fileContentInfo => {
+    sendFileContentInfo(res, fileContentInfo);
   }).catch((err) => {
     serverLogger.error('Failed to get file. %s', err);
     res.sendStatus(404);
@@ -89,18 +89,18 @@ app.get('/pages/*', (req, res) => {
   const uri = req.params[0];
   serverLogger.debug('Getting file by uri %s', uri);
 
-  contentService.getFileByUri(uri).then(file => {
-    sendFile(res, file);
+  contentService.getFileContentInfoByUri(uri).then(fileContentInfo => {
+    sendFileContentInfo(res, fileContentInfo);
   }).catch((err) => {
     serverLogger.error('Failed to get file. %s', err);
     res.sendStatus(404);
   });
 });
 
-function sendFile(res, file) {
-  const rendered = Mustache.render(file, settings.templateValues);
+function sendFileContentInfo(res, fileContentInfo) {
+  const rendered = Mustache.render(fileContentInfo.content, settings.templateValues);
   res.type('text/markdown')
-  res.send({content: rendered})
+  res.send({content: rendered, id: fileContentInfo.id})
 }
 
 export default function start() {

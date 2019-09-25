@@ -57,7 +57,7 @@ class ContentService {
     return this.files;
   }
 
-  getFile(id) {
+  getFileContentInfo(id) {
     return new Promise((resolve, reject) => {
       if (!this.files[id]) {
         serverLogger.warn('File not found by id %s in files', id, this.files);
@@ -66,15 +66,15 @@ class ContentService {
       }
 
       readFile(this.files[id].file, "utf8", (err, data) => {
-        err ? reject(err) : resolve(data);
+        err ? reject(err) : resolve({content: data, id: id});
       })
     })
   }
 
-  getFileByUri(uri) {
+  getFileContentInfoByUri(uri) {
     for (let i of Object.values(this.files)) {
       if ((i.group === 'root' && i.name === uri) || i.group + '/' + i.name === uri) {
-        return this.getFile(i.id);
+        return this.getFileContentInfo(i.id);
       }
     }
 

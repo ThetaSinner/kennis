@@ -16,6 +16,9 @@ export class EditorComponent implements OnInit {
   @Output()
   onSave: EventEmitter<string> = new EventEmitter();
 
+  @Output()
+  onSaveAndExit = new EventEmitter();
+
   public Editor = ClassicEditor;
   content: string;
 
@@ -31,5 +34,9 @@ export class EditorComponent implements OnInit {
 
   save() {
     this.onSave.emit(this.content);
+  }
+
+  saveAndClose() {
+    this.onSaveAndExit.emit(this.content);
   }
 }

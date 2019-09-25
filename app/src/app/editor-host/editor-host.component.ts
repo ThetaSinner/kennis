@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, flatMap } from 'rxjs/operators';
 import { FilesService, Article } from '../service/files.service';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ export class EditorHostComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private filesService: FilesService) { }
 
   ngOnInit() {
@@ -30,6 +31,12 @@ export class EditorHostComponent implements OnInit {
   handleSave(content) {
     this.filesService.updateArticle(this.sourceId, content).subscribe(() => {
       console.log('Saved!');
+    });
+  }
+
+  handleSaveAndExit(content) {
+    this.filesService.updateArticle(this.sourceId, content).subscribe(() => {
+      this.router.navigate(['/pages', this.sourceId]);
     });
   }
 }

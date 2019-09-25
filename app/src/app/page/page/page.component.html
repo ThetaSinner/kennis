@@ -1,4 +1,7 @@
-<a routerLink="/home" id="backLink"><i class="material-icons icon">arrow_back</i></a>
+<div class="controls-container">
+  <a routerLink="/home"><i class="material-icons icon">arrow_back</i></a>
+  <a routerLink="/editor" [queryParams]="{sourceId: articleId}"><i class="material-icons icon">edit</i></a>
+</div>
 <div class="container markdown-container">
   <div class="row">
     <div class="col-sm">

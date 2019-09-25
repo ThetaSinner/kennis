@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PageComponent implements OnInit {
   article$: any;
+  articleId: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +35,10 @@ export class PageComponent implements OnInit {
           return this.filesService.getPage(q)
         }
       }),
-      map(p => marked(p.content))
+      map(p => {
+        this.articleId = p.id;
+        return marked(p.content)
+      })
     )
   }
 }
