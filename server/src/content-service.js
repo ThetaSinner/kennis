@@ -1,11 +1,11 @@
 import chokidar from 'chokidar';
 import path from 'path';
-import { readFile } from 'fs';
+import { readFile, writeFileSync } from 'fs';
 import uuid from 'uuid/v4';
 import { EventEmitter } from 'events';
 import { settings } from './settings';
 import { serverLogger } from './server-logger';
-import { loggers } from 'winston';
+import { loggers, add } from 'winston';
 
 class ContentService {
   constructor(watcher, baseDir) {
@@ -22,9 +22,7 @@ class ContentService {
         this._emitChange();
       })
       .on('add', addPath => {
-        const addStructured = this._structured(addPath);
-        this.files[addStructured.id] = addStructured;
-        this._emitChange();
+        this._addFileFromPath(addPath);
       })
       .on('change', changePath => {
         const changeStructured = this._structured(changePath);
@@ -35,6 +33,17 @@ class ContentService {
         delete this.files[removeStructured.id];
         this._emitChange();
       });
+  }
+
+  _addFileFromPath(addPath) {
+    const addStructured = this._structured(addPath);
+    if (this._fileExists(addStructured)) {
+      return;
+    }
+    this.files[addStructured.id] = addStructured;
+    this._emitChange();
+
+    return addStructured;
   }
 
   _emitChange() {
@@ -71,8 +80,28 @@ class ContentService {
     return Promise.reject(Error('Not found'));
   }
 
+  _fileExists(structured) {
+    const uri = (structured.group === 'root' ? '' : structured.group + '/') + structured.name;
+    for (let i of Object.values(this.files)) {
+      if ((i.group === 'root' && i.name === uri) || i.group + '/' + i.name === uri) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   addChangeListener(listener) {
     this.changedEmitter.on('change', listener);
+  }
+
+  addFile(request) {
+    const saveFilePath = path.join(settings.baseDir, request.group == 'root' ? '' : request.group, `${request.name}.md`);
+
+    writeFileSync(saveFilePath, `# ${request.name}\nWrite something _fascinating_ here!`);
+
+    const structured = this._addFileFromPath(saveFilePath);
+    return structured.id;
   }
 
   _structured(fromPath) {

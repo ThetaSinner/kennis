@@ -6,9 +6,11 @@ import { searchService } from './search-service';
 import { settings } from './settings';
 import Mustache from 'mustache';
 import { serverLogger } from './server-logger';
+import * as bodyParser from 'body-parser';
 
 const app = express()
 app.use(cors())
+app.use(bodyParser.json())
 
 const port = 3200
 
@@ -33,6 +35,17 @@ app.get('/files', (req, res) => {
       group: file.group
     }
   }).filter(f => f !== null));
+})
+
+app.post('/files', (req, res) => {
+  if (!req.body || !req.body.name || !req.body.group) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const id = contentService.addFile(req.body);
+
+  res.send(id);
 })
 
 app.get('/files/:id', (req, res) => {
