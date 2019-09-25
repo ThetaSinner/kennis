@@ -60,6 +60,23 @@ app.get('/files/:id', (req, res) => {
   });
 })
 
+app.post('/files/:id', (req, res) => {
+  const id = req.params.id;
+  if (!id || !req.body || !req.body.content) {
+    res.sendStatus(400);
+    return;
+  }
+
+  serverLogger.debug('Updating file by id %s', id);
+
+  contentService.updateFile(req.params.id, req.body.content).then(() => {
+    res.json({});
+  }).catch((err) => {
+    serverLogger.error('Failed to update file %s', err);
+    res.sendStatus(500);
+  })
+})
+
 app.get('/search', (req, res) => {
   const text = req.query.text;
 

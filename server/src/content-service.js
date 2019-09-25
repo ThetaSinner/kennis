@@ -1,6 +1,6 @@
 import chokidar from 'chokidar';
 import path from 'path';
-import { readFile, writeFileSync } from 'fs';
+import { readFile, writeFileSync, writeFile } from 'fs';
 import uuid from 'uuid/v4';
 import { EventEmitter } from 'events';
 import { settings } from './settings';
@@ -104,6 +104,24 @@ class ContentService {
     // Ensure that the file is added to the cache if file system events aren't available.
     const structured = this._addFileFromPath(saveFilePath);
     return structured.id;
+  }
+
+  updateFile(id, content) {
+    return new Promise((resolve, reject) => {
+      if (!this.files[id]) {
+        reject(Error('File not found'));
+        return;
+      }
+
+      writeFile(this.files[id].file, content, 'utf-8', (err) => {
+        if (err) {
+          reject(err);
+        }
+        else {
+          resolve();
+        }
+      })
+    });
   }
 
   _structured(fromPath) {

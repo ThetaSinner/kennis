@@ -38,4 +38,8 @@ export class FilesService {
   addArticle(group: string, addFileInput: string): Observable<NewArticle> {
     return <Observable<NewArticle>> this.http.post(`${environment.serverUrl}/files`, {group: group, name: addFileInput})
   }
+
+  updateArticle(id: string, content: any): Observable<any> {
+    return this.http.post(`${environment.serverUrl}/files/${id}`, {content: content});
+  }
 }

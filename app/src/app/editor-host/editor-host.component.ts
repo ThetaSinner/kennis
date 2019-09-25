@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class EditorHostComponent implements OnInit {
   source$: Observable<Article>;
+  sourceId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,12 +19,17 @@ export class EditorHostComponent implements OnInit {
 
   ngOnInit() {
     this.source$ = this.route.queryParams.pipe(
-      map(params => params.sourceId),
+      map(params => {
+        this.sourceId = params.sourceId;
+        return this.sourceId;
+      }),
       flatMap(sourceId => this.filesService.getArticle(sourceId))
     );
   }
 
   handleSave(content) {
-    console.log(`Saving content ${content}`)
+    this.filesService.updateArticle(this.sourceId, content).subscribe(() => {
+      console.log('Saved!');
+    });
   }
 }
