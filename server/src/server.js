@@ -45,7 +45,7 @@ app.post('/files', (req, res) => {
 
   const id = contentService.addFile(req.body);
 
-  res.send(id);
+  res.send({articleId: id});
 })
 
 app.get('/files/:id', (req, res) => {

@@ -12,6 +12,10 @@ export interface Article {
   content: string;
 }
 
+export interface NewArticle {
+  articleId: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +33,9 @@ export class FilesService {
 
   getPage(uri: string): Observable<Article> {
     return <Observable<Article>> this.http.get(`${environment.serverUrl}/pages/${uri}`);
+  }
+
+  addArticle(group: string, addFileInput: string): Observable<NewArticle> {
+    return <Observable<NewArticle>> this.http.post(`${environment.serverUrl}/files`, {group: group, name: addFileInput})
   }
 }

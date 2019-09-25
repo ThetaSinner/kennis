@@ -37,6 +37,7 @@ class ContentService {
 
   _addFileFromPath(addPath) {
     const addStructured = this._structured(addPath);
+    // De-duplicate adds, because remote added files are added to the cache in case file system events aren't available.
     if (this._fileExists(addStructured)) {
       return;
     }
@@ -100,6 +101,7 @@ class ContentService {
 
     writeFileSync(saveFilePath, `# ${request.name}\nWrite something _fascinating_ here!`);
 
+    // Ensure that the file is added to the cache if file system events aren't available.
     const structured = this._addFileFromPath(saveFilePath);
     return structured.id;
   }

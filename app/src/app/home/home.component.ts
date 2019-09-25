@@ -3,6 +3,7 @@ import { FilesService } from '../service/files.service';
 import { groupBy, map, concatMapTo, concatMap, mergeMap, reduce, merge } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { SearchService } from '../service/search.service';
+import { Router } from '@angular/router';
 
 interface ArticleGroup {
   group: string;
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   // Add
   addFileInput: string;
 
-  constructor(private filesService: FilesService, private searchService: SearchService) {
+  constructor(private filesService: FilesService, private searchService: SearchService, private router: Router) {
     this.transformArticleGroups = this.transformArticleGroups.bind(this);
 
     this.articlesGroups$ = this.filesService.articles.pipe(
@@ -153,6 +154,8 @@ export class HomeComponent implements OnInit {
   }
 
   addFile() {
-    console.log('Add file', this.addFileInput, 'to group', this.group);
+    this.filesService.addArticle(this.group, this.addFileInput).subscribe(response => {
+      this.router.navigate(['/editor'], { queryParams: { sourceId: response.articleId } });
+    })
   }
 }
