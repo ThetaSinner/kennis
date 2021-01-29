@@ -30,7 +30,7 @@
     "@ckeditor/ckeditor5-heading": "^11.0.5",
     "@ckeditor/ckeditor5-link": "^11.1.2",
     "@ckeditor/ckeditor5-list": "^12.1.0",
-    "@ckeditor/ckeditor5-markdown-gfm": "^11.0.5",
+    "@ckeditor/ckeditor5-markdown-gfm": "^25.0.0",
     "@ckeditor/ckeditor5-paragraph": "^11.0.5",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "bootstrap": "^4.3.1",
