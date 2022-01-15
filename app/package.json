@@ -35,7 +35,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "bootstrap": "^4.3.1",
     "dompurify": "^1.0.11",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
